@@ -16,22 +16,22 @@ export default class ApplicationView extends Component {
         { id: 3, name: "bobby blue heyyy"}
     ]
 
-    candyType = [
+    candyTypes = [
         { id: 1, type: "sugar crazy"},
         { id: 2, type: "poision"},
         { id: 3, type: "dont eat this"}
     ]
 
     individualCandies = [
-        { id: 1, name: "hot dog"},
-        { id: 2, name: "not candy"},
-        { id: 3, name: "anti freeze"}
+        { id: 1, candyTypeId: 1, name: "hot dog"},
+        { id: 2, candyTypeId: 2, name: "not candy"},
+        { id: 3, candyTypeId: 3, name: "anti freeze"}
     ]
     
     state = {
       storeLocations: this.storeLocations,
       employees: this.employees,
-      candyType: this.candyType,
+      candyType: this.candyTypes,
       individualCandies: this.individualCandies
     }
 
@@ -39,7 +39,8 @@ export default class ApplicationView extends Component {
     return (
       <React.Fragment>
         <Route exact path="/" render={(props) => {
-            return <CandyType candyType={this.state.candyType} />
+            return <CandyType individualCandies={this.state.individualCandies} candyTypes={this.state.candyType} />
+
         }} />
         <Route path="/employees" render={(props) => {
             return <Employees employees={this.state.employees} />

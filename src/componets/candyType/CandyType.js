@@ -4,13 +4,24 @@ export default class CandyType extends Component {
   render() {
     return (
       <div className = "content">
-        {
-            this.props.candyType.map(candyType => 
-                <section key={candyType.id}>
-                    <h3>{candyType.type}</h3>
+        {/* {
+            this.props.individualCandies.map(individualCandie => 
+                <section key={individualCandie.id}>
+                    <h3>{individualCandie.name}</h3>
                 </section>
                 )
-        }
+        } */}
+        {
+    this.props.individualCandies.map(individualCandie =>
+        <div key={individualCandie.id}>
+            {individualCandie.name }
+            {" "}of type:{" "}
+            {this.props.candyTypes.find(candyType => {return  candyType.id === individualCandie.candyTypeId
+            }).type
+            }
+        </div>
+    )
+}
       </div>
     )
   }
