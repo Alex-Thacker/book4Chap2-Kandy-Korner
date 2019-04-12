@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class Employees extends Component {
   render() {
     return (
-      <div>
+      <div className = "content">
         {
             this.props.employees.map(employee => 
                 <section key={employee.id}>

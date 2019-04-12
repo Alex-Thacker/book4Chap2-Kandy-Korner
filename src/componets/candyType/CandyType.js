@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class CandyType extends Component {
   render() {
     return (
-      <div>
+      <div className = "content">
         {
             this.props.candyType.map(candyType => 
                 <section key={candyType.id}>

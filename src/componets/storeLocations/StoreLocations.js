@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class StoreLocations extends Component {
   render() {
     return (
-      <div>
+      <div className = "content">
         {
             this.props.storeLocations.map(storeLocation => 
                 <section key={storeLocation.id}>
