@@ -16,7 +16,7 @@ export default class CandyType extends Component {
         <div key={individualCandie.id}>
             {individualCandie.name }
             {" "}of type:{" "}
-            {this.props.candyTypes.find(candyType => {return  candyType.id === individualCandie.candyTypeId
+            {this.props.candyTypes.find(candyType => {return candyType.id === individualCandie.candyTypeId
             }).type
             }
         </div>

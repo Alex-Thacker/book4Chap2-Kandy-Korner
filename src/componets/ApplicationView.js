@@ -5,34 +5,31 @@ import Employees from "./employees/Employees"
 import CandyType from "./candyType/CandyType"
 
 export default class ApplicationView extends Component {
-    storeLocations = [
-        { id: 1, name: "wonka factory", address: "123 wonka fonka lane"},
-        { id: 2, name: "fonka wactory", address: "321 we sell booze lane"}
-    ]
+  //employees,candyTypes,individualCandies
+  componentDidMount() {
+    const newState = {}
 
-    employees = [
-        { id: 1, name: "jack the bomber"},
-        { id: 2, name: "stacy the killer"},
-        { id: 3, name: "bobby blue heyyy"}
-    ]
+    fetch("http://localhost:5002/storeLocations")
+      .then(r => r.json())
+      .then(storeLocations => newState.storeLocations = storeLocations)
+      .then(() => fetch("http://localhost:5002/employees"))
+      .then(r => r.json())
+      .then(employees => newState.employees = employees)
+      .then(() => fetch("http://localhost:5002/candyTypes"))
+      .then(r => r.json())
+      .then(candyTypes => newState.candyType = candyTypes)
+      .then(() => fetch("http://localhost:5002/individualCandies"))
+      .then(r => r.json())
+      .then(individualCandies => newState.individualCandies = individualCandies)
 
-    candyTypes = [
-        { id: 1, type: "sugar crazy"},
-        { id: 2, type: "poision"},
-        { id: 3, type: "dont eat this"}
-    ]
-
-    individualCandies = [
-        { id: 1, candyTypeId: 1, name: "hot dog"},
-        { id: 2, candyTypeId: 2, name: "not candy"},
-        { id: 3, candyTypeId: 3, name: "anti freeze"}
-    ]
+      .then(() => this.setState(newState))
+  }
     
     state = {
-      storeLocations: this.storeLocations,
-      employees: this.employees,
-      candyType: this.candyTypes,
-      individualCandies: this.individualCandies
+      storeLocations: [],
+      employees: [],
+      candyType: [],
+      individualCandies: []
     }
 
   render() {
