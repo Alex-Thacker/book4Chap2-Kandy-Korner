@@ -24,19 +24,31 @@ export default class ApplicationView extends Component {
 
       .then(() => this.setState(newState))
   }
+
+  deleteCandy = (id) => {
+    return fetch (`http://localhost:5002/individualCandies/${id}`, {
+      method: "DELETE"
+    })
+      .then(r => r.json())
+      .then(() => fetch("http://localhost:5002/individualCandies"))
+      .then(r => r.json())
+      .then(obj => this.setState({
+        individualCandies: obj
+      }))
+  }
+  state = {
+    storeLocations: [],
+    employees: [],
+    candyType: [],
+    individualCandies: []
+  }
     
-    state = {
-      storeLocations: [],
-      employees: [],
-      candyType: [],
-      individualCandies: []
-    }
 
   render() {
     return (
       <React.Fragment>
         <Route exact path="/" render={(props) => {
-            return <CandyType individualCandies={this.state.individualCandies} candyTypes={this.state.candyType} />
+            return <CandyType individualCandies={this.state.individualCandies} candyTypes={this.state.candyType} deleteCandy={this.deleteCandy}/>
 
         }} />
         <Route path="/employees" render={(props) => {

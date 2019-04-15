@@ -19,6 +19,7 @@ export default class CandyType extends Component {
             {this.props.candyTypes.find(candyType => {return candyType.id === individualCandie.candyTypeId
             }).type
             }
+            <button onClick={() => this.props.deleteCandy(individualCandie.id)}>Delete</button>
         </div>
     )
 }
