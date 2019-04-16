@@ -3,23 +3,23 @@ import { Route } from 'react-router-dom'
 import StoreLocations from './storeLocations/StoreLocations'
 import Employees from "./employees/Employees"
 import CandyType from "./candyType/CandyType"
+import CandyTypeManager from "../modules/CandyTypeManager"
+import EmployeeManager from "../modules/EmployeeManager"
+import IndividualCandyManager from "../modules/IndividualCandyManager"
+import StoreLocationManager from "../modules/StoreLocationManager"
 
 export default class ApplicationView extends Component {
   //employees,candyTypes,individualCandies
   componentDidMount() {
     const newState = {}
 
-    fetch("http://localhost:5002/storeLocations")
-      .then(r => r.json())
+    StoreLocationManager.getAll()
       .then(storeLocations => newState.storeLocations = storeLocations)
-      .then(() => fetch("http://localhost:5002/employees"))
-      .then(r => r.json())
+    EmployeeManager.getAll()
       .then(employees => newState.employees = employees)
-      .then(() => fetch("http://localhost:5002/candyTypes"))
-      .then(r => r.json())
+    CandyTypeManager.getAll()
       .then(candyTypes => newState.candyType = candyTypes)
-      .then(() => fetch("http://localhost:5002/individualCandies"))
-      .then(r => r.json())
+    IndividualCandyManager.getAll()
       .then(individualCandies => newState.individualCandies = individualCandies)
 
       .then(() => this.setState(newState))
