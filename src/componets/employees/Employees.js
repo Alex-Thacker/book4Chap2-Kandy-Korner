@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom"
 
 export default class Employees extends Component {
   render() {
@@ -7,7 +8,8 @@ export default class Employees extends Component {
         {
             this.props.employees.map(employee => 
                 <section key={employee.id}>
-                <h3>{employee.name}</h3>
+                <Link to={`/employees/${employee.id}`}>{employee.name}</Link>
+                <button onClick={() => this.props.deleteEmployee(employee.id)}>Delete</button>
                 </section>
                 )
         }

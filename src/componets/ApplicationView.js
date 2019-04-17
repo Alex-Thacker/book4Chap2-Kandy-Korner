@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
+import { withRouter } from "react-router"
 import StoreLocations from './storeLocations/StoreLocations'
 import Employees from "./employees/Employees"
 import CandyType from "./candyType/CandyType"
@@ -7,8 +8,11 @@ import CandyTypeManager from "../modules/CandyTypeManager"
 import EmployeeManager from "../modules/EmployeeManager"
 import IndividualCandyManager from "../modules/IndividualCandyManager"
 import StoreLocationManager from "../modules/StoreLocationManager"
+import CandyTypeDetail from "./candyType/CandyTypeDetail"
+import EmployeeDetail from "./employees/EmployeeDetail"
+import StoreLocationDetail from "./storeLocations/StoreLocationDetail"
 
-export default class ApplicationView extends Component {
+class ApplicationView extends Component {
   //employees,candyTypes,individualCandies
   componentDidMount() {
     const newState = {}
@@ -32,10 +36,41 @@ export default class ApplicationView extends Component {
       .then(r => r.json())
       .then(() => fetch("http://localhost:5002/individualCandies"))
       .then(r => r.json())
-      .then(obj => this.setState({
-        individualCandies: obj
-      }))
+      .then(obj => {
+        this.props.history.push("/")
+        this.setState({individualCandies: obj})
+      }
+      )
   }
+
+  deleteEmployee = (id) => {
+    return fetch (`http://localhost:5002/employees/${id}`, {
+      method: "DELETE"
+    })
+      .then(r => r.json())
+      .then(() => fetch("http://localhost:5002/employees"))
+      .then(r => r.json())
+      .then(obj => {
+        this.props.history.push("/employees")
+        this.setState({employees: obj})
+      }
+      )
+  }
+
+  deleteLocation = (id) => {
+    return fetch (`http://localhost:5002/storeLocations/${id}`, {
+      method: "DELETE"
+    })
+      .then(r => r.json())
+      .then(() => fetch("http://localhost:5002/storeLocations"))
+      .then(r => r.json())
+      .then(obj => {
+        this.props.history.push("/stores")
+        this.setState({storeLocations: obj})
+      }
+      )
+  }
+
   state = {
     storeLocations: [],
     employees: [],
@@ -43,43 +78,39 @@ export default class ApplicationView extends Component {
     individualCandies: []
   }
     
-
   render() {
     return (
       <React.Fragment>
         <Route exact path="/" render={(props) => {
             return <CandyType individualCandies={this.state.individualCandies} candyTypes={this.state.candyType} deleteCandy={this.deleteCandy}/>
-
         }} />
-        <Route path="/employees" render={(props) => {
-            return <Employees employees={this.state.employees} />
+        <Route exact path="/employees" render={(props) => {
+            return <Employees employees={this.state.employees} deleteEmployee={this.deleteEmployee} />
         }} />
-        <Route path="/stores" render={(props) => {
-            return <StoreLocations storeLocations={this.state.storeLocations} />
+        <Route exact path="/stores" render={(props) => {
+            return <StoreLocations storeLocations={this.state.storeLocations} deleteLocation={this.deleteLocation} />
+        }} />
+        <Route path="/individualCandie/:individualCandieId(\d+)" render={(props) => {
+          let individualCandie = this.state.individualCandies.find(individualCandy => 
+            individualCandy.id === parseInt(props.match.params.individualCandieId)
+          )
+          return <CandyTypeDetail individualCandie={individualCandie} deleteCandy={this.deleteCandy} candyTypes={this.state.candyType} />
+        }} />
+        <Route path="/employees/:employeeId(\d+)" render={(props) => {
+          let employee = this.state.employees.find(employee => 
+            employee.id === parseInt(props.match.params.employeeId)
+            )
+          return <EmployeeDetail employee={employee} deleteEmployee={this.deleteEmployee} />
+        }} />
+        <Route path="/stores/:storeId(\d+)" render={(props) => {
+          let store = this.state.storeLocations.find(store =>
+            store.id === parseInt(props.match.params.storeId)
+            )
+            return <StoreLocationDetail store={store} deleteLocation={this.deleteLocation} />
         }} />
       </React.Fragment>
     )
   }
 }
 
-// Stores
-// Employees
-// Candies--
-// render() {
-//     return (
-//         <React.Fragment>
-//             <Route exact path="/" render={(props) => {
-//                 return <LocationList locations={this.state.locations} />
-//             }} />
-//             <Route path="/animals" render={(props) => {
-//                 return <AnimalList animals={this.state.animals} />
-//             }} />
-//             <Route path="/employees" render={(props) => {
-//                 return <EmployeeList employees={this.state.employees} />
-//             }} />
-//             <Route path="/owners" render={(props) => {
-//                 return <Owners owners={this.state.owners} />
-//             }} />
-//         </React.Fragment>
-//     )
-// }
+export default withRouter(ApplicationView)

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom"
 
 export default class StoreLocations extends Component {
   render() {
@@ -7,8 +8,8 @@ export default class StoreLocations extends Component {
         {
             this.props.storeLocations.map(storeLocation => 
                 <section key={storeLocation.id}>
-                <h3>{storeLocation.name}</h3>
-                <h3>{storeLocation.address}</h3>
+                <Link to={`/stores/${storeLocation.id}`}>{storeLocation.name}<br></br>{storeLocation.address}</Link>
+                <button onClick={() => this.props.deleteLocation(storeLocation.id)}>Delete</button>
                 </section>
                 )
         }
