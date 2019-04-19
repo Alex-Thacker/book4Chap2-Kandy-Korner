@@ -14,23 +14,28 @@
   "employees": [
     {
       "id": 1,
-      "name": "jack the bomber"
+      "name": "jack the bomber",
+      "storeLocationId": 1
     },
     {
       "id": 2,
-      "name": "stacy the killer"
+      "name": "stacy the killer",
+      "storeLocationId": 1
     },
     {
       "id": 3,
-      "name": "bobby blue heyyy"
+      "name": "bobby blue heyyy",
+      "storeLocationId": 2
     },
     {
       "name": "yoyo",
-      "id": 4
+      "id": 4,
+      "storeLocationId": 1
     },
     {
       "name": "newEmployeeeeeeee",
-      "id": 5
+      "id": 5,
+      "storeLocationId": 2
     }
   ],
   "candyTypes": [
