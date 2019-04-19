@@ -17,6 +17,7 @@ export default class CandyType extends Component {
         </div>
     )
 }
+        <button onClick={() => this.props.history.push("/new")}>Add New!!!</button>
       </div>
     )
   }

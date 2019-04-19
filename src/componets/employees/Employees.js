@@ -13,6 +13,7 @@ export default class Employees extends Component {
                 </section>
                 )
         }
+        <button onClick={() => this.props.history.push("/employees/newEmployeeYOOOOOOO")}>Add New</button>
       </div>
     )
   }

@@ -1,59 +1,80 @@
 {
-    "storeLocations": [
-        {
-            "id": 1,
-            "name": "wonka factory",
-            "address": "123 wonka fonka lane"
-        },
-        {
-            "id": 2,
-            "name": "fonka wactory",
-            "address": "321 we sell booze lane"
-        }
-    ],
-    "employees": [
-        {
-            "id": 1,
-            "name": "jack the bomber"
-        },
-        {
-            "id": 2,
-            "name": "stacy the killer"
-        },
-        {
-            "id": 3,
-            "name": "bobby blue heyyy"
-        }
-    ],
-    "candyTypes": [
-        {
-            "id": 1,
-            "type": "sugar crazy"
-        },
-        {
-            "id": 2,
-            "type": "poision"
-        },
-        {
-            "id": 3,
-            "type": "dont eat this"
-        }
-    ],
-    "individualCandies": [
-        {
-            "id": 1,
-            "candyTypeId": 1,
-            "name": "hot dog"
-        },
-        {
-            "id": 2,
-            "candyTypeId": 2,
-            "name": "not candy"
-        },
-        {
-            "id": 3,
-            "candyTypeId": 3,
-            "name": "anti freeze"
-        }
-    ]
+  "storeLocations": [
+    {
+      "id": 1,
+      "name": "wonka factory",
+      "address": "123 wonka fonka lane"
+    },
+    {
+      "id": 2,
+      "name": "fonka wactory",
+      "address": "321 we sell booze lane"
+    }
+  ],
+  "employees": [
+    {
+      "id": 1,
+      "name": "jack the bomber"
+    },
+    {
+      "id": 2,
+      "name": "stacy the killer"
+    },
+    {
+      "id": 3,
+      "name": "bobby blue heyyy"
+    },
+    {
+      "name": "yoyo",
+      "id": 4
+    },
+    {
+      "name": "newEmployeeeeeeee",
+      "id": 5
+    }
+  ],
+  "candyTypes": [
+    {
+      "id": 1,
+      "type": "sugar crazy"
+    },
+    {
+      "id": 2,
+      "type": "poision"
+    },
+    {
+      "id": 3,
+      "type": "dont eat this"
+    },
+    {
+      "id": 4,
+      "type": "candy"
+    },
+    {
+      "id": 5,
+      "type": "blue"
+    }
+  ],
+  "individualCandies": [
+    {
+      "id": 1,
+      "candyTypeId": 1,
+      "name": "hot dog"
+    },
+    {
+      "id": 2,
+      "candyTypeId": 2,
+      "name": "not candy"
+    },
+    {
+      "id": 3,
+      "candyTypeId": 3,
+      "name": "anti freeze"
+    },
+    {
+      "name": "bark",
+      "candyTypeId": 5,
+      "id": 4
+    }
+  ]
 }
