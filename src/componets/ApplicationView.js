@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import { withRouter } from "react-router"
 import StoreLocations from './storeLocations/StoreLocations'
 import Employees from "./employees/Employees"
@@ -13,6 +13,7 @@ import EmployeeDetail from "./employees/EmployeeDetail"
 import StoreLocationDetail from "./storeLocations/StoreLocationDetail"
 import EmployeeForm from "./employees/EmployeeForm"
 import CandyTypeForm from "./candyType/CandyTypeForm"
+import Login from "./authenticate/Login"
 
 class ApplicationView extends Component {
   //employees,candyTypes,individualCandies
@@ -96,17 +97,33 @@ class ApplicationView extends Component {
     individualCandies: []
   }
 
+  isLogin = () => {
+    return sessionStorage.getItem("valid") !== null
+  }
+
   render() {
     return (
       <React.Fragment>
         <Route exact path="/" render={(props) => {
-          return <CandyType individualCandies={this.state.individualCandies} candyTypes={this.state.candyType} deleteCandy={this.deleteCandy} {...props} />
+          if(this.isLogin()){
+            return <CandyType individualCandies={this.state.individualCandies} candyTypes={this.state.candyType} deleteCandy={this.deleteCandy} {...props} />
+          } else {
+            return <Redirect to="/login" />
+          }
         }} />
         <Route exact path="/employees" render={(props) => {
-          return <Employees employees={this.state.employees} deleteEmployee={this.deleteEmployee} {...props} />
+          if(this.isLogin()) {
+            return <Employees employees={this.state.employees} deleteEmployee={this.deleteEmployee} {...props} />
+          } else {
+            return <Redirect to="/login" />
+          }
         }} />
         <Route exact path="/stores" render={(props) => {
-          return <StoreLocations storeLocations={this.state.storeLocations} deleteLocation={this.deleteLocation} />
+          if(this.isLogin()){
+            return <StoreLocations storeLocations={this.state.storeLocations} deleteLocation={this.deleteLocation} />
+          } else {
+            return <Redirect to="/login" />
+          }
         }} />
         <Route path="/individualCandie/:individualCandieId(\d+)" render={(props) => {
           let individualCandie = this.state.individualCandies.find(individualCandy =>
@@ -131,6 +148,9 @@ class ApplicationView extends Component {
         }} />
         <Route path="/new" render={(props) => {
           return <CandyTypeForm {...props} candyType={this.state.candyType} postCandy={this.postCandy} />
+        }} />
+        <Route path="/login" render={(props) => {
+          return <Login {...props} />
         }} />
       </React.Fragment>
     )
